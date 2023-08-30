@@ -218,7 +218,42 @@ public class Main {
             return haystack.indexOf(needle);
         return -1;
     }
+    public static int searchInsert(int[] nums, int target) {
+        int l = 0;
+        int r = nums.length-1;
+        int med = (l+r)/2;
+        if(l==r){
+            if(target>nums[0])
+                return 1;
+            else
+                return 0;
+        }
+        while (true){
+            if(nums[med]==target)
+                return med;
+            if(nums[med]>target)
+            {
+                r=med;
+                if(r-l==1 && target<nums[l])
+                    return 0;
+            }
+            else{
+                l=med;
+                if(r-l==1 && target>nums[r])
+                    return r+1;
+            }
+            if((l+r)/2>0)
+                med = (l+r)/2;
+            else
+                return med;
+        }
+    }
     public static void main(String[] args) {
-
+       /* System.out.println(searchInsert(new int[]{1,3,5,6},5));
+        System.out.println(searchInsert(new int[]{1,3,5,6},2));
+        System.out.println(searchInsert(new int[]{1,3,5,6},7));
+        System.out.println(searchInsert(new int[]{1,3,5,6},-1));*/
+        System.out.println(searchInsert(new int[]{1,3},2));
+        System.out.println(searchInsert(new int[]{1,3},0));
     }
 }
