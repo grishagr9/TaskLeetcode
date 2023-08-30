@@ -221,39 +221,52 @@ public class Main {
     public static int searchInsert(int[] nums, int target) {
         int l = 0;
         int r = nums.length-1;
-        int med = (l+r)/2;
-        if(l==r){
-            if(target>nums[0])
-                return 1;
+
+        while (l <= r) {
+            int mid =l + (r-l)/2;
+            if (nums[mid] == target)
+                return mid;
             else
-                return 0;
+                if (nums[mid] > target)
+                    r = mid-1;
+                else
+                    l = mid+1;
         }
-        while (true){
-            if(nums[med]==target)
-                return med;
-            if(nums[med]>target)
+
+        return l;
+    }
+    public static int lengthOfLastWord(String s) {
+        return s.split(" ")[s.split(" ").length-1].length();
+    }
+    public String addBinary(String a, String b) {
+        char perenos = '0';
+        char[] sum = new char[Math.max(a.length(),b.length())];
+        int lenA = a.length()-1;
+        int lenB = b.length()-1;
+        char[] arrrr= new char[sum.length];
+        Arrays.fill(arrrr,'0');
+        String arr = String.valueOf(arrrr);
+        for (int i = sum.length-1; i>=0;i--){
+            int cur = a.charAt(lenA)+b.charAt(lenB)+perenos;
+            if(cur>=146)
             {
-                r=med;
-                if(r-l==1 && target<nums[l])
-                    return 0;
+                sum[i] = cur%2==0?'0':'1';
+                perenos = '1';
             }
-            else{
-                l=med;
-                if(r-l==1 && target>nums[r])
-                    return r+1;
+            else {
+                perenos = '0';
+                sum[i] = cur%2==0?'0':'1';
             }
-            if((l+r)/2>0)
-                med = (l+r)/2;
-            else
-                return med;
+            if(lenB>0) {
+                lenB--;
+            }else b = arr;
+            if(lenA>0) {
+                lenA--;
+            }else a=arr;
         }
+        return perenos>'0'? "1"+String.valueOf(sum) :String.valueOf(sum);
     }
     public static void main(String[] args) {
-       /* System.out.println(searchInsert(new int[]{1,3,5,6},5));
-        System.out.println(searchInsert(new int[]{1,3,5,6},2));
-        System.out.println(searchInsert(new int[]{1,3,5,6},7));
-        System.out.println(searchInsert(new int[]{1,3,5,6},-1));*/
-        System.out.println(searchInsert(new int[]{1,3},2));
-        System.out.println(searchInsert(new int[]{1,3},0));
+        Main main = new Main();
     }
 }
