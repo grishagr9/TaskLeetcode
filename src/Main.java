@@ -266,7 +266,82 @@ public class Main {
         }
         return perenos>'0'? "1"+String.valueOf(sum) :String.valueOf(sum);
     }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int perenos = 0;
+        ListNode p = new ListNode();
+        p.val = (l1.val + l2.val + perenos) % 10;
+        perenos = (l1.val + l2.val) / 10;
+        ListNode res = p;
+        l1=l1.next;
+        l2=l2.next;
+        while(l1!=null||l2!=null){
+            if(l1!=null && l2!=null) {
+                p.next = new ListNode();
+                p.next.val = (l1.val + l2.val + perenos) % 10;
+                perenos = (l1.val + l2.val + perenos) / 10;
+                l1 = l1.next;
+                l2 = l2.next;
+                p = p.next;
+            }else if(l1!=null) {
+                p.next = new ListNode();
+                p.next.val=(l1.val + perenos) % 10;
+                perenos = (l1.val + perenos) / 10;
+                l1 = l1.next;
+                p = p.next;
+            } else if (l2!=null) {
+                p.next = new ListNode();
+                p.next.val=(l2.val + perenos) % 10;
+                perenos = (l2.val + perenos) / 10;
+                l2 = l2.next;
+                p = p.next;
+            }
+        }
+        if (perenos != 0) {
+            p.next = new ListNode();
+            p.next.val = perenos;
+        }
+        return res;
+    }
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null)
+            return null;
+        ListNode res = new ListNode(head.val);
+        ListNode p = res;
+        int cur = head.val;
+        head = head.next;
+        while (head!=null){
+            if(head.val==cur){
+                head=head.next;
+                continue;
+            }
+            cur = head.val;
+            head = head.next;
+            res.next = new ListNode(cur);
+            res = res.next;
+        }
+        return p;
+    }
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        for (int i = nums1.length-1; i>=0;i--){
+            if(m*n<0)
+                break;
+            if(nums1[m-1]<nums2[n-1]){
+                nums1[i]=nums2[n-1];
+                n--;
+            }else{
+                while(m>-1 && nums1[m-1]>nums2[n-1]) {
+                    m--;
+                }
+                for(int j = i-1; j>=m; j--)
+                {
+                    nums1[j+1]=nums1[j];
+                }
+                nums1[m-1]=nums2[n-1];
+            }
+        }
+    }
     public static void main(String[] args) {
         Main main = new Main();
+
     }
 }
