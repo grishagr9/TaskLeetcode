@@ -1,6 +1,8 @@
 import java.awt.List;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Main {
@@ -340,8 +342,8 @@ public class Main {
             }
         }
     }
+
     public static void main(String[] args) {
-        Main main = new Main();
 
     }
 }
