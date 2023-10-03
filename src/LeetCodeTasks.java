@@ -1,5 +1,6 @@
 import com.sun.security.jgss.GSSUtil;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -144,9 +145,11 @@ public class LeetCodeTasks {
             System.out.println(c + " " +Character.isAlphabetic(c));
         }
     }
+    public int tes2(int ...k){
+        return k.length;
+    }
+
     public static void main(String[] args) {
-        LeetCodeTasks leetCodeTasks = new LeetCodeTasks();
-        System.out.println(leetCodeTasks.isPalindrome(
-                "A man, a plan, a canal: Panama"));
+
     }
 }
